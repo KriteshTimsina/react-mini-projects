@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
+// import ErrorToast from '../ErrorToast';
 import Modal from './Modal';
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Main = ({showModal,setShowModal}) => {
     const[peoples,setPeoples] = useState();
@@ -9,18 +13,24 @@ const Main = ({showModal,setShowModal}) => {
     // const[closeModal,setCloseModal]= useState(false);
     const [amountPerPerson,setAmountPerPerson] = useState(null);
 
-    const generateBillandShowModal = () =>{
-        if(tipAmount){
-
-            setAmountPerPerson((parseInt(totalAmount) + parseInt(tipAmount) ) / parseInt(peoples) );
-            
+    const handleTip = () =>{
+        setIncludeTip((prevValue) => !prevValue);
+        setShowModal(false);
+    }
+    const generateBill = () =>{
+        if(!peoples || !totalAmount){
+             toast.error('Input fields cannot be empty', { autoClose: 4000 });
+             setShowModal(false);
         }
-        else{
-            setAmountPerPerson(parseFloat(totalAmount) / parseFloat(peoples));
-        }
-        if(peoples && totalAmount)
+        else {
+            if(tipAmount){
+            setAmountPerPerson((parseFloat(totalAmount) + parseInt(tipAmount) ) / parseFloat(peoples) ); 
+            }
+            else{
+                setAmountPerPerson(parseFloat(totalAmount) / parseFloat(peoples));
+            }
             setShowModal(true);
-        else return
+        }
     }
   return (
     <div className='flex justify-center items-center flex-col mt-20 '>
@@ -43,7 +53,7 @@ const Main = ({showModal,setShowModal}) => {
         </div>
         <div className='  space-x-2 my-1 -ml-40'>
             <input
-                onClick={()=>setIncludeTip((prevValue) => !prevValue)}
+                onClick={handleTip}
                 type="checkbox" 
                 // checked={includeTip}
                 defaultChecked={includeTip}
@@ -66,7 +76,7 @@ const Main = ({showModal,setShowModal}) => {
         }
         </div>
         <div>
-            <button onClick={generateBillandShowModal} className='bg-cyan-600 p-2 my-5 rounded-md'>Split Share</button>
+            <button onClick={generateBill} className='bg-cyan-600 p-2 my-5 rounded-md'>Split Share</button>
             
         </div>
         {/* <div className=' absolute h-4/5 top-32'>
@@ -80,6 +90,8 @@ const Main = ({showModal,setShowModal}) => {
             showModal ? <Modal setShowModal={setShowModal} amountPerPerson ={amountPerPerson} peoples={peoples} totalAmount={totalAmount} tipAmount={tipAmount} /> : ""
         }
         <div>
+        <ToastContainer />
+        
             
         </div>
     </div>

@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BillSplit from "./pages/billSplitCalculator/BillSplit";
-import AdvertisemenPage from "./pages/billSplitCalculator/AdvertisemenPage";
+import BmiCalculator from "./pages/bmi/BmiCalculator";
 
 const App = () => {
   
@@ -15,8 +15,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<AdvertisemenPage />} />
-        <Route path="/bill-splitter" element={<BillSplit />} />
+        <Route path="/bill-calculator" element={<BillSplit />} />
+        <Route path="/bmi-calculator" element={<BmiCalculator />} />
       </Routes> 
     </div>
   );
