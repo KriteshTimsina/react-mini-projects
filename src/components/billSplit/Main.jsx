@@ -6,7 +6,7 @@ const Main = ({showModal,setShowModal}) => {
     const[totalAmount,setTotalAmount] = useState();
     const[includeTip,setIncludeTip] = useState(false);
     const[tipAmount,setTipAmount] = useState(0);
-    const[closeModal,setCloseModal]= useState(false);
+    // const[closeModal,setCloseModal]= useState(false);
     const [amountPerPerson,setAmountPerPerson] = useState(null);
 
     const generateBillandShowModal = () =>{
@@ -19,7 +19,7 @@ const Main = ({showModal,setShowModal}) => {
             setAmountPerPerson(parseFloat(totalAmount) / parseFloat(peoples));
         }
         if(peoples && totalAmount)
-            setShowModal(!showModal);
+            setShowModal(true);
         else return
     }
   return (
@@ -77,7 +77,7 @@ const Main = ({showModal,setShowModal}) => {
         }
         </div> */}
         {
-            showModal ? <Modal amountPerPerson ={amountPerPerson} peoples={peoples} totalAmount={totalAmount} tipAmount={tipAmount} /> : ""
+            showModal ? <Modal setShowModal={setShowModal} amountPerPerson ={amountPerPerson} peoples={peoples} totalAmount={totalAmount} tipAmount={tipAmount} /> : ""
         }
         <div>
             
