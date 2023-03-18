@@ -7,6 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BillSplit from "./pages/billSplitCalculator/BillSplit";
 import BmiCalculator from "./pages/bmi/BmiCalculator";
+import ErrorPage from "./pages/ErrorPage";
+import Index from "./pages/randomColorGenerator/Index";
 
 const App = () => {
   
@@ -16,7 +18,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bill-calculator" element={<BillSplit />} />
-        <Route path="/bmi-calculator" element={<BmiCalculator />} />
+        <Route path="/random" element={<Index />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes> 
     </div>
   );
